@@ -110,4 +110,26 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
     t.boolean   :stiky, :default => false
     t.boolean   :block, :default => false
   end
+
+	create_table "messages" do |t|
+		t.integer 	:author_id, :null => false
+		t.string 		:subject,		:null => false
+		t.text 			:content
+		t.text 			:html_content
+		t.datetime 	:created_at
+		t.datetime 	:updated_at
+		t.boolean 	:unread, 		:default => true
+	end
+
+	create_table "message_copies" do |t|
+		t.integer 	:recipient_id, 	:null => false
+		t.integer 	:message_id, 		:null => false
+		t.integer 	:folder_id, 		:null => false
+	end
+
+	create_table "folders" do |t|
+		t.integer 	:user_id, 			:null => false
+	 	t.integer		:parent_id
+		t.string		:name, 					:null => false
+	end
 end

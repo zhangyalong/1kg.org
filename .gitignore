@@ -6,3 +6,5 @@ doc/plugins
 vendor/rails
 config/database.yml
 .DS_Store
+db/*.sqlite3
+*~

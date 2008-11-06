@@ -129,7 +129,6 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
 
 	create_table "folders" do |t|
 		t.integer 	:user_id, 			:null => false
-	 	t.integer		:parent_id
 		t.string		:name, 					:null => false
 	end
 end

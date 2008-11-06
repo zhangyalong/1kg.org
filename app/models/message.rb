@@ -5,4 +5,21 @@ class Message < ActiveRecord::Base
 	#through the copies. Since each copy belongs to a simple
 	#recipient
 	has_many :recipients, :through => :message_copies
+	
+	before_create :prepare_copies
+
+	attr_accessor :to
+	attr_accessible :subject, :body, :to
+
+	private
+
+	def prepoare_copies
+		return if to.blank?
+
+		to.each do |recipient|
+			recipient = User.find(recipient)
+			message_copies.build(:recipient => recipient.id, 
+													 :folder_id => recipient.inbox.id)
+		end
+	end
 end

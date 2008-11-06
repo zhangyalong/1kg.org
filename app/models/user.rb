@@ -23,8 +23,17 @@ class User < ActiveRecord::Base
 	has_many :folders
 
   belongs_to :geo
-	  
+
+	before_create :build_inbox	
   before_save :encrypt_password
+
+	def build_inbox
+		folders.build(:name => "Inbox")
+	end
+
+	def inbox
+		folders.find_by_name("Inbox")
+	end
   
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.

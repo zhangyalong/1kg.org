@@ -6,7 +6,7 @@ class Message < ActiveRecord::Base
 	#recipient
 	has_many :recipients, :through => :message_copies
 	
-	before_create :prepare_copies
+	before_create :format_content, :prepare_copies
 
 	attr_accessor :to
 	attr_accessible :subject, :content, :html_content, :to
@@ -21,5 +21,10 @@ class Message < ActiveRecord::Base
 			message_copies.build(:recipient_id => recipient.id, 
 													 :folder_id => recipient.inbox.id)
 		end
+	end
+
+	def format_content
+		self.html_content = auto_link(self.content) { |text| truncate(text, 50) }
+		self.html_content = white_list(self.content)
 	end
 end

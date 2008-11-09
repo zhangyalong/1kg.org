@@ -9,16 +9,16 @@ class Message < ActiveRecord::Base
 	before_create :prepare_copies
 
 	attr_accessor :to
-	attr_accessible :subject, :body, :to
+	attr_accessible :subject, :content, :html_content, :to
 
 	private
 
-	def prepoare_copies
+	def prepare_copies
 		return if to.blank?
 
 		to.each do |recipient|
 			recipient = User.find(recipient)
-			message_copies.build(:recipient => recipient.id, 
+			message_copies.build(:recipient_id => recipient.id, 
 													 :folder_id => recipient.inbox.id)
 		end
 	end

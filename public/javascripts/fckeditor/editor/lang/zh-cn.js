@@ -211,7 +211,7 @@ DlgImgAlignTextTop	: "文本上方",
 DlgImgAlignTop		: "顶端",
 DlgImgPreview		: "预览",
 DlgImgAlertUrl		: "请输入图象地址",
-DlgImgLinkTab		: "贴图",
+DlgImgLinkTab		: "链接",
 
 // Flash Dialog
 DlgFlashTitle		: "Flash 属性",

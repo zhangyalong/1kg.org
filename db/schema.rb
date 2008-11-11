@@ -124,11 +124,6 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
 	create_table "message_copies" do |t|
 		t.integer 	:recipient_id, 	:null => false
 		t.integer 	:message_id, 		:null => false
-		t.integer 	:folder_id, 		:null => false
 	end
 
-	create_table "folders" do |t|
-		t.integer 	:user_id, 			:null => false
-		t.string		:name, 					:null => false
-	end
 end

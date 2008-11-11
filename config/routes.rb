@@ -1,6 +1,12 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :users, :sent, :messages, :mailbox
-  map.with_options :controller => "users" do |user|
+  map.resources :users, :has_many => [:visited, 
+																			:participations, 
+																			:schools, 
+																			:activities, 
+																			:topics,
+																			:sent]
+
+	map.with_options :controller => "users" do |user|
     user.signup 'signup', :action => "new"
     user.activate 'activate/:activation_code', :action => "activate"
     user.setting 'setting', :action => "edit"
@@ -14,28 +20,9 @@ ActionController::Routing::Routes.draw do |map|
   
   map.root :controller => "misc", :action => "index"
   
-  map.resources :users do |user|
-    user.resources :visiteds
-    user.resources :participations
-    
-    # submitted by the user
-    user.resources :schools
-    user.resources :activities
-    
-    user.resources :topics
-  end
-    
-  map.resources :schools do |school|
-    school.resources :visits
-    school.resources :photos
-    school.resource  :space
-  end
+  map.resources :schools, :has_one => :space, :has_many => [:visits, :photos] 
   
-  map.resources :activities do |activity|
-    activity.resources :participations
-    activity.resources :photos
-    activity.resource  :space
-  end
+  map.resources :activities, :has_one => :space, :has_many => [:participations, :photos]
 
   map.resources :boards do |board|
     board.resources :topics do |topic|

@@ -9,7 +9,7 @@ class Message < ActiveRecord::Base
 	before_create :format_content, :prepare_copies
 
 	attr_accessor :to
-	attr_accessible :subject, :content, :html_content, :to
+	attr_accessible :subject, :content, :to
 
 	private
 
@@ -18,13 +18,12 @@ class Message < ActiveRecord::Base
 
 		to.each do |recipient|
 			recipient = User.find(recipient)
-			message_copies.build(:recipient_id => recipient.id, 
-													 :folder_id => recipient.inbox.id)
+			message_copies.build(:recipient_id => recipient.id) 
 		end
 	end
 
 	def format_content
-		self.html_content = auto_link(self.content) { |text| truncate(text, 50) }
+		self.content = auto_link(self.content) { |text| truncate(text, 50) }
 		self.html_content = white_list(self.content)
 	end
 end

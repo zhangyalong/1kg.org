@@ -1,0 +1,9 @@
+<% @page_title = "我发送的消息" %>
+
+<p><strong>主题: </strong><%=h @message.subject -%>
+<p><strong>发给: </strong><%= @message.recipients.map(&:login).to_sentence -%></p>
+<p><strong>时间: </strong><%= @message.created_at.to_s(:db) -%></p>
+<p>
+	<strong>内容:</strong><br />
+	<%= @message.html_content -%>
+</p>

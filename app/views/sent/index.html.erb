@@ -1,0 +1,18 @@
+<% @page_title = "我发送的消息" %>
+<table border="0" cellspacing="0" summary="我发送消息列表">
+	<tr>
+		<th>发给</th>
+		<th>主题</th>
+		<th>时间</th>
+	</tr>
+
+	<% for message in @messages %>
+		<tr class="<%= cycle('odd-line', 'even-line') %>">
+			<td><%= message.recipients.map(&:login).to_sentence %></td>
+			<td><%= link_to h(message.subject) , user_sent_path(current_user, message) %></td>
+			<td><%= message.created_at.to_s(:db) %></td>
+		</tr>
+	<% end %>
+</table>
+
+<%= will_paginate @messages %>

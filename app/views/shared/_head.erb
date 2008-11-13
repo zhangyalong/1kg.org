@@ -10,7 +10,10 @@
 	<% unless logged_in? -%>
 	<a href="/login">登录</a> | <a href="/signup">注册</a>
 	<% else -%>
-	<%= current_user.login %> | <%#= link_to inbox_title(@unreads), messages_url %> | <%= link_to "我的主页", user_path(current_user.id) %> | <a href="/setting">设置</a> | <a href="/logout">注销</a>
+		<%= current_user.login %> | 
+		<%= link_to "我的消息(#{current_user.unread_messages.size})", user_received_index_path(current_user) -%> |
+		<%= link_to "我的主页", user_path(current_user.id) %> | <a href="/setting">设置</a> | 
+		<a href="/logout">注销</a>
 	<% end -%>
 	 | <%#= link_to "新手指南", help_url %><img src="/images/help.gif" style="vertical-align:bottom" />
 </div>

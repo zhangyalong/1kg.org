@@ -3,7 +3,8 @@
  * orange: #ff9900
  */
 
-
+.green {background-color: green}
+.red {background-color: red}
 h1 { font-size: 25px; font-weight: bold; color: #494949; margin:0; padding: 8px 0px 6px 0px; line-height:1.1em; }
 /*.h1sub {float:right; font-size:12px; font-weight:normal; color:gray; }*/
 h2 { font: 14px normal Arial, Helvetica, sans-serif; color: #f90; margin-bottom: 5px; line-height: 150%; }

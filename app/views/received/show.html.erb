@@ -1,0 +1,9 @@
+<% @page_title = "我收到的消息" %>
+<p><strong>主题: </strong><%=h @copy.subject %></p>
+<p><strong>来自: </strong><%=h @copy.author.login %></p>
+<p><strong>时间: </strong><%=h @copy.created_at.to_s(:db) %></p>
+<p>
+	<strong>内容:</strong>
+	<br />
+	<%= @copy.html_content %>
+</p>

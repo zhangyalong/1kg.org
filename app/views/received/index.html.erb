@@ -1,0 +1,23 @@
+<% @page_title = '我收到的消息' %>
+
+<table border='0' cellspacing='0' summary="我收到的消息列表">
+	<tr>
+		<th>来自</th>
+		<th>主题</th>
+		<th>时间</th>
+	</tr>
+
+	<% for copy in @copies %>
+		<% if copy.unread %>
+			<tr class="red">
+		<% else %>
+			<tr class="green">
+		<% end %>
+			<td><%=h copy.author.login %></td>
+			<td><%= link_to h(copy.subject), user_received_path(current_user, copy)%></td>
+			<td><%= copy.created_at.to_s(:db) %></td>
+		</tr>
+	<% end %>
+</table>
+
+<%= will_paginate @copies %>

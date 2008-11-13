@@ -4,7 +4,8 @@ ActionController::Routing::Routes.draw do |map|
 																			:schools, 
 																			:activities, 
 																			:topics,
-																			:sent]
+																			:sent,
+																			:received]
 
 	map.with_options :controller => "users" do |user|
     user.signup 'signup', :action => "new"

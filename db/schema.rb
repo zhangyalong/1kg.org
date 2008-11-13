@@ -113,17 +113,17 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
 
 	create_table "messages" do |t|
 		t.integer 	:author_id, :null => false
-		t.string 		:subject,		:null => false
+		t.string 		:subject		
 		t.text 			:content
 		t.text 			:html_content
 		t.datetime 	:created_at
 		t.datetime 	:updated_at
-		t.boolean 	:unread, 		:default => true
 	end
 
 	create_table "message_copies" do |t|
 		t.integer 	:recipient_id, 	:null => false
 		t.integer 	:message_id, 		:null => false
+		t.boolean 	:unread, 				:default => true
 	end
 
 end

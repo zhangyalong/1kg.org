@@ -18,7 +18,7 @@ class Message < ActiveRecord::Base
 
 		to.each do |recipient|
 			recipient = User.find(recipient)
-			message_copies.build(:recipient_id => recipient.id) 
+			message_copies.build(:recipient_id => recipient.id, :unread => true) 
 		end
 	end
 

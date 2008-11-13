@@ -17,9 +17,17 @@ class User < ActiveRecord::Base
                               :geometry => "72x72>",
                               :versions => {"small" => "16x16", "medium" => "32x32", "large" => "48x48"}
                             }
-	#add relationship between messages and folders			
-  has_many :sent_messages, :class_name => "Message", :foreign_key => "author_id"
-	has_many :received_messages, :class_name => "MessageCopy", :foreign_key => "recipient_id"
+
+	#add relationship between messages			
+  has_many :sent_messages, 			:class_name => "Message", 
+																:foreign_key => "author_id"
+
+	has_many :received_messages, 	:class_name => "MessageCopy", 
+															 	:foreign_key => "recipient_id"
+
+	has_many :unread_messages, 		:class_name 		=> "MessageCopy",
+														 		:conditions 		=> {:unread => true},
+														 		:foreign_key 	=> "recipient_id"
 
   belongs_to :geo
 

@@ -7,3 +7,5 @@
 	<br />
 	<%= @copy.html_content %>
 </p>
+<p>
+	<%= link_to '回复', reply_user_received_path(current_user, @copy) %>

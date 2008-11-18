@@ -11,4 +11,15 @@ module ApplicationHelper
   def title_suffix
     "&middot;&nbsp; &middot;&nbsp; &middot;&nbsp; &middot;&nbsp; &middot;&nbsp; &middot;&nbsp;"
   end
+
+	def mailbox_nav_menu
+		content_for "sidebar" do
+			render :partial => "layouts/mailbox"
+		end
+	end
+
+	def customize_paginate(value)
+		will_paginate value, :previous_label => '<<',
+												 :next_label => '>>'
+	end
 end

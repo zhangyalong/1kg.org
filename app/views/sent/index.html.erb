@@ -1,4 +1,5 @@
 <% @page_title = "我发送的消息" %>
+<% mailbox_nav_menu %>
 <table border="0" cellspacing="0" summary="我发送消息列表">
 	<tr>
 		<th>发给</th>
@@ -15,4 +16,4 @@
 	<% end %>
 </table>
 
-<%= will_paginate @messages %>
+<%= customize_paginate @messages %>

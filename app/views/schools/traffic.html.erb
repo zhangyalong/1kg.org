@@ -1,0 +1,37 @@
+<% @page_title = "提交学校信息" -%>
+
+<% content_for :sidebar do -%>
+  <p>> <%= link_to "返回", schools_url %></p>
+<% end -%>
+
+<div class="posting">
+  <div class="block">
+    <div class="school-steps">
+  		<ul>
+  			<li class="first">1 填写学校基本信息</li>
+  			<li class="middle-current">2 填写交通信息</li>
+  			<li class="middle">3 填写学校需求</li>
+  			<li class="last">4 补充其它信息<span class="hook"></span></li>
+  		</ul>
+    </div>    
+    
+    <% form_for :school, :url => schools_url(:step => 'traffic') do |f| -%>
+    <%= f.hidden_field :id %>
+    <p><label>学校所在省市</label><%= @school.geo.ancestors[0].name if @school.geo.child? %> <%= @school.geo.name %></p>
+    
+    <% unless @school.geo.counties.size == 0 -%>
+    <p><label>学校所属县</label><%= f.select :county_id, @school.geo.counties.collect {|c| [c.name, c.id]} %></p>
+    <% end -%>
+    
+    <% f.fields_for @school.traffic do |t| -%>
+    <p><label>附近景点</label><%= t.text_field :sight, :size => 30, :class => 'text' %></p>
+    <p><label>交通方式</label><%= t.text_field :transport, :size => 30, :class => 'text' %></p>
+    <p><label>路程时间</label><%= t.text_field :duration, :size => 10, :class => 'text' %> 小时</p>
+    <p><label>交通费用</label><%= t.text_field :charge, :size => 10, :class => 'text' %> 元</p>
+    <p><label>路程攻略</label><%= t.text_area  :description, :cols => 40, :rows => 15 %></p>
+    <% end -%>
+    
+    <p><label>&nbsp;</label><%= submit_tag "保存，下一步" %></p>
+    <% end -%>
+  </div>
+</div>

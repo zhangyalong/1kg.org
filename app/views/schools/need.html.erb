@@ -1,0 +1,35 @@
+<% @page_title = "提交学校信息" -%>
+
+<% content_for :sidebar do -%>
+  <p>> <%= link_to "返回", schools_url %></p>
+<% end -%>
+
+<div class="posting">
+  <div class="block">
+    <div class="school-steps">
+  		<ul>
+  			<li class="first">1 填写学校基本信息</li>
+  			<li class="middle">2 填写交通信息</li>
+  			<li class="middle-current">3 填写学校需求</li>
+  			<li class="last">4 补充其它信息<span class="hook"></span></li>
+  		</ul>
+    </div>    
+    
+    <% form_for :school, :url => schools_url(:step => 'need') do |f| -%>
+    <%= f.hidden_field :id %>
+    
+    <% f.fields_for @school.need do |n| -%>
+    <p><label class="notice">紧急需求</label><%= n.text_field :urgency, :size => 40, :class => 'text' %></p>
+    <p><label>书籍</label><%= n.text_field :book, :size => 40, :class => 'text' %></p>
+    <p><label>文具</label><%= n.text_field :stationary, :size => 40, :class => 'text' %></p>
+    <p><label>体育用品</label><%= n.text_field :sport, :size => 40, :class => 'text' %></p>
+    <p><label>衣服</label><%= n.text_field :cloth, :size => 40, :class => 'text' %></p>
+    <p><label>教具</label><%= n.text_field :accessory, :size => 40, :class => 'text' %></p>
+    <p><label>课程活动</label><%= n.text_field :course, :size => 40, :class => 'text' %></p>
+    <p><label>支教老师</label><%= n.text_field :teacher, :size => 40, :class => 'text' %></p>
+    <p><label>其他</label><%= n.text_field :other, :size => 40, :class => 'text' %></p>
+    <% end -%>
+    <p><label>&nbsp;</label><%= submit_tag "保存，下一步" %></p>
+    <% end -%>
+  </div>
+</div>

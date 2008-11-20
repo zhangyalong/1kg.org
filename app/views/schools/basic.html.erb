@@ -6,10 +6,16 @@
 
 <div class="posting">
   <div class="block">
-    <h3>学校基本信息</h3>
-    <p class="note">一份完整的学校信息可以大大增加旅行者去探访的可能，所以请认真填写下面的每一项内容</p>
+    <div class="school-steps">
+    		<ul>
+    			<li class="first-current">1 填写学校基本信息</li>
+    			<li class="middle">2 填写交通信息</li>
+    			<li class="middle">3 填写学校需求</li>
+    			<li class="last">4 补充其它信息<span class="hook"></span></li>
+    		</ul>
+    </div>    
     
-    <% form_for :school, :url => schools_url do |f| -%>
+    <% form_for :school, :url => schools_url(:step => 'basic') do |f| -%>
     <p><label>类型</label>
       <select id="school_category" name="school[category]">
         <% School.categories.each_with_index do |p,i| -%>
@@ -31,14 +37,14 @@
       <p><label>班级</label><%= b.text_field :class_amount, :size => 10 %> 个</p>
       <p><label>老师</label><%= b.text_field :teacher_amount, :size => 10 %> 人</p>
       <p><label>学生</label><%= b.text_field :student_amount, :size => 10 %> 人</p>
-      <p><label>是否有图书室</label></p>
+      <p><label>是否有图书室</label><%= radio_choice b, :has_library %></p>
       <p><label>学校有图书</label><%= b.text_field :book_amount, :size => 10 %> 册</p>
-      <p><label>是否有电脑</label></p>
+      <p><label>是否有电脑</label><%= radio_choice b, :has_pc %></p>
       <p><label>学校有电脑</label><%= b.text_field :pc_amount, :size => 10 %> 台</p>
-      <p><label>是否能上网</label></p>
+      <p><label>是否能上网</label><%= radio_choice b, :has_internet %></p>
     <% end -%>
     
-    <p><label>&nbsp;</label><%= submit_tag "提 交" %></p>
+    <p><label>&nbsp;</label><%= submit_tag "保存，下一步" %></p>
     <% end -%>
   </div>
 </div>

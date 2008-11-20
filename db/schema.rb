@@ -198,9 +198,89 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
     t.integer   :has_library,         :limit => 1
     t.integer   :has_pc,              :limit => 1
     t.integer   :has_internet,        :limit => 1
-    t.integer   :book_amount
-    t.integer   :pc_amount
+    t.integer   :book_amount,         :default => 0
+    t.integer   :pc_amount,           :default => 0
     t.datetime  :last_modified_at
     t.integer   :last_modified_by_id
   end
+  
+  create_table "school_traffics" do |t|
+    t.integer   :school_id
+    t.string    :sight
+    t.string    :transport
+    t.string    :duration
+    t.string    :charge
+    t.text      :description
+    t.text      :description_html
+    t.datetime  :last_modified_at
+    t.integer   :last_modified_by_id
+  end
+  
+  create_table "school_needs" do |t|
+    t.integer   :school_id
+    t.string    :urgency
+    t.string    :book
+    t.string    :stationary
+    t.string    :sport
+    t.string    :cloth
+    t.string    :accessory
+    t.string    :course
+    t.string    :teacher
+    t.string    :other
+    t.datetime  :last_modified_at
+    t.integer   :last_modified_by_id
+  end
+  
+  create_table "school_contacts" do |t|
+    t.integer   :school_id
+    t.string    :name
+    t.string    :role
+    t.string    :telephone
+    t.string    :email
+    t.string    :qq
+    t.datetime  :last_modified_at
+    t.integer   :last_modified_by_id
+  end
+  
+  create_table "school_locals" do |t|
+    t.integer   :school_id
+    t.string    :incoming_from
+    t.string    :incoming_average
+    
+    t.integer   :ngo_support,     :limit => 1
+    t.string    :ngo_name
+    t.datetime  :ngo_start_at
+    t.string    :ngo_contact
+    t.string    :ngo_contact_via
+    
+    t.text      :advice
+    t.text      :advice_html
+    
+    t.datetime  :last_modified_at
+    t.integer   :last_modified_by_id
+  end
+    
+  create_table "school_finders" do |t|
+    t.integer   :school_id
+    t.string    :name
+    t.string    :email
+    t.string    :qq
+    t.string    :msn
+    t.datetime  :survey_at
+    t.datetime  :last_modified_at
+    t.integer   :last_modified_by_id
+  end
+  
+  create_table "tags" do |t|
+    t.string    :name
+  end
+  
+  create_table "taggings" do |t|
+    t.integer   :tag_id
+    t.integer   :taggable_id
+    t.string    :taggable_type
+    t.datetime  :created_at
+  end
+  add_index :taggings, :tag_id
+  add_index :taggings, [:taggable_id, :taggable_type]
 end

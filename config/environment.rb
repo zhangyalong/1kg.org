@@ -81,3 +81,5 @@ ActionMailer::Base.smtp_settings = {
 }
 
 CalendarDateSelect.format = :iso_date
+
+TagList.delimiter = " "

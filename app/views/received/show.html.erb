@@ -1,4 +1,5 @@
 <% @page_title = "我收到的消息" %>
+
 <p><strong>主题: </strong><%=h @copy.subject %></p>
 <p><strong>来自: </strong><%=h @copy.author.login %></p>
 <p><strong>时间: </strong><%=h @copy.created_at.to_s(:db) %></p>
@@ -8,4 +9,8 @@
 	<%= @copy.html_content %>
 </p>
 <p>
-	<%= link_to '回复', reply_user_received_path(current_user, @copy) %>
+  <%= link_to '回复', reply_user_received_path(current_user, @copy) -%>
+  <%= link_to '删除', user_received_path(current_user, @copy),
+                      :confirm => '您确定要删除这条站内信息么?',
+                      :method => :delete -%>
+</p>

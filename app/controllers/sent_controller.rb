@@ -2,7 +2,7 @@ class SentController < ApplicationController
 	before_filter :login_required
 
   def index
-		@messages = current_messages.paginate :per_page => 10,
+		@messages = current_messages.undeleted.paginate :per_page => 10,
 																										:page  		=> params[:page],
 																										:order 		=> "created_at DESC"
   end
@@ -20,15 +20,26 @@ class SentController < ApplicationController
 
 		if @message.save
 			flash[:notice] = "消息已发出"
-			redirect_to :action => "index"
+			redirect_to index_path
 		else
 			render :action => "new"
 		end
   end
 
-	private
+  def destroy
+    @message = current_messages.find(params[:id])
+    @message.update_attribute('deleted', true)
+    flash[:notice] = "你刚刚删除了一条站内消息"
+    redirect_to index_path
+  end
 
-	def current_messages
-		current_user.sent_messages
-	end
+  private
+
+  def current_messages
+    current_user.sent_messages
+  end
+
+  def index_path
+    user_sent_index_path(current_user)
+  end
 end

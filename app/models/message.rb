@@ -11,6 +11,8 @@ class Message < ActiveRecord::Base
 	attr_accessor :to
 	attr_accessible :subject, :content, :to
 
+  named_scope :undeleted, :conditions => {:deleted => false}
+
 	private
 
 	def prepare_copies

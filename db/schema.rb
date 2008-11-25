@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
 		t.string 		:subject		
 		t.text 			:content
 		t.text 			:html_content
+    t.boolean    :deleted,   :default => false
 		t.datetime 	:created_at
 		t.datetime 	:updated_at
 	end

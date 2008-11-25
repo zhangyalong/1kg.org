@@ -7,3 +7,7 @@
 	<strong>内容:</strong><br />
 	<%= @message.html_content -%>
 </p>
+
+<%= link_to '删除', user_sent_path(current_user, @message), 
+                    :confirm => '您确定要删除这条站内消息么?',
+                    :method => :delete %>

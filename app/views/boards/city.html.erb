@@ -1,6 +1,21 @@
 <% @page_title = "#{@city.name}同城" -%>
 
 <% content_for :sidebar do -%>
+  <h4><%= @city.name %>的活动</h4>
+  <table border="0" cellspacing="5" cellpadding="5">
+    <tr>
+      <th>活动</th>
+      <th>出发</th>
+      <th>到达</th>
+    </tr>
+    <% @activities.each do |a| -%>
+    <tr>
+      <td><%= link_to a.title, activity_url(a.id) %></td>
+      <td><%= a.departure.name %></td>
+      <td><%= a.arrival.name %></td>
+    </tr>
+    <% end -%>
+  </table>
 <% end -%>
 
 <div class="moderators">

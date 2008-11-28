@@ -13,6 +13,8 @@ class BoardsController < ApplicationController
       @city_board = @board.talkable
       @city = @city_board.geo
       @citizens = @city.users
+      
+      @activities = Activity.find(:all, :conditions => ["done=? and (departure_id=? or arrival_id=?)", false, @city.id, @city.id])
       render :action => "city"
       
     elsif @board.talkable.class == PublicBoard

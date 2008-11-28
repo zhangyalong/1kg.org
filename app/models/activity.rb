@@ -13,6 +13,10 @@ class Activity < ActiveRecord::Base
     %w(公益旅游 物资募捐 支教 其他)
   end
   
+  def category_name
+    self.class.categories[category]
+  end
+  
   
   private
   def format_content

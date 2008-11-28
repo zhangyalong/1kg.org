@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   before_filter :login_required, :except => [:index]
   
   def index
-    
+    @activities = Activity.find(:all, :conditions => {:done => false})
   end
   
   def new

@@ -1,0 +1,15 @@
+<% @page_title = "创建开放讨论区" -%>
+
+<% content_for :sidebar do -%>
+<% end -%>
+
+<div class="setting">
+  <div class="block">
+    <h3>创建开放讨论区</h3>
+    <% form_for :public_board, :url => admin_boards_url(:type => 'public') do |f| -%>
+    <p><label>讨论区名称</label><%= f.text_field :title, :size => 15 %></p>
+    <p><label>介绍</label><%= f.text_area :description, :cols => 30, :rows => 15 %></p>
+    <p><label>&nbsp;</label><%= submit_tag "创建" %> 或 <%= link_to "取消", admin_boards_url %></p>
+    <% end -%>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<% @page_title = "#{@public_board.title} - 社区" -%>
+
+<% content_for :sidebar do -%>
+<% end -%>
+
+<div class="moderators">
+  版主：<%= User.moderators_of(@public_board.board).collect {|u| link_to(u.login, user_url(u.id))}.join(", ") %>
+</div>
+
+<div class="operations">
+  <%= link_to "写新帖子", new_board_topic_url(@board) %> | 
+</div>
+
+<div class="posting">
+  <div class="block">
+    <h3>介绍</h3>
+    <p><%= @public_board.description_html %></p>
+  </div>
+  
+  <div class="block">
+    <h3>所有话题</h3>
+    <table border="0" cellspacing="5" cellpadding="5">
+      <% @topics.each do |t| -%>
+      <tr>
+        <td><%= link_to t.title, board_topic_url(@board, t) %></td>
+        <td><%= link_to t.user.login, user_url(t.user) %></td>
+      </tr>
+      <% end -%>
+    </table>
+  </div>
+  
+</div>
+

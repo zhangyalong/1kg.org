@@ -4,4 +4,21 @@
 <% end -%>
 
 <h3>同 城</h3>
-<%= @cities.collect {|c| link_to c.geo_name, board_url(c.board_id)}.join(", ") -%>
+<p><%= @cities.collect {|c| link_to c.talkable.geo_name, board_url(c.id)}.join(", ") -%></p>
+
+<h3>讨论区</h3>
+<table border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>名称</th>
+    <th>帖子数</th>
+    <th>版主</th>
+  </tr>
+  <% @publics.each do |p| -%>
+  <tr>
+    <td><%= link_to p.talkable.title, board_url(p.id) %></td>
+    <td><%= p.topics_count %></td>
+    <td>&nbsp;</td>
+  </tr>
+  <% end -%>
+</table>
+

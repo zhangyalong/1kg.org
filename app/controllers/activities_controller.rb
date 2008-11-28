@@ -12,7 +12,6 @@ class ActivitiesController < ApplicationController
   def create
     @activity = Activity.new(params[:activity])
     @activity.user = current_user
-    
     @activity.save!
     flash[:notice] = "发布成功"
     redirect_to activities_url

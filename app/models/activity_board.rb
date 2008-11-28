@@ -1,4 +1,4 @@
-class PublicBoard < ActiveRecord::Base
+class ActivityBoard < ActiveRecord::Base
   include BodyFormat
   
   has_one :board, :as => :talkable

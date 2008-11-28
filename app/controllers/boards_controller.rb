@@ -1,6 +1,8 @@
 class BoardsController < ApplicationController
   def index
-    @cities = CityBoard.find(:all)
+    #@cities = CityBoard.find(:all)
+    @cities = Board.find(:all, :conditions => "(deleted_at is NULL or deleted_at='') and talkable_type = 'CityBoard'")
+    @publics = Board.find(:all, :conditions => "(deleted_at is NULL or deleted_at='') and talkable_type = 'PublicBoard'")
   end
   
   
@@ -12,6 +14,11 @@ class BoardsController < ApplicationController
       @city = @city_board.geo
       @citizens = @city.users
       render :action => "city"
+      
+    elsif @board.talkable.class == PublicBoard
+      @public_board = @board.talkable
+      render :action => "public"
+      
     end
   end
   

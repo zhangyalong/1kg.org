@@ -13,6 +13,10 @@ class Message < ActiveRecord::Base
 
   named_scope :undeleted, :conditions => {:deleted => false}
 
+  def is_purge?
+    self.message_copies.size == 0
+  end
+
 	private
 
 	def prepare_copies

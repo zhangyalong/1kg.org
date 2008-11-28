@@ -1,4 +1,4 @@
-# This file is auto-generated from the current state of the database. Instead of editing this file, 
+# This file is auto-generated from the current state of the database. Instead of editing this file,
 # please use the migrations feature of Active Record to incrementally modify your database, and
 # then regenerate this schema definition.
 #
@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081009072037) do
+ActiveRecord::Schema.define do
 
   create_table "users", :force => true do |t|
     t.string   "login"
@@ -28,21 +28,21 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
     t.integer  "geo_id"
   end
   add_index :users, [:email, :state]
-  
+
   # for active-rbac (role-based authorization)
   create_table(:roles) do |t|
     t.datetime :created_at, :null => false
     t.datetime :updated_at, :null => false
-  
+
     t.string :identifier, :limit => 100, :null => false
     t.string :description
   end
   add_index :roles, :identifier
-  
+
   create_table(:roles_users, :id => false) do |t|
     t.integer :role_id, :null => false
     t.integer :user_id, :null => false
-  end  
+  end
   add_index :roles_users, [ :role_id, :user_id ], :unique => true
 
   create_table(:static_permissions) do |t|
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
   end
   add_index :roles_static_permissions, [ :role_id, :static_permission_id ], :unique => true, :name => "role_id_and_static_permission_id"
   # end definition of active-rbac
-  
+
   create_table "geos" do |t|
     t.integer :parent_id
     t.integer :lft, :null => false
@@ -68,11 +68,11 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
     t.string  :name,:null => false
     t.integer :zipcode
   end
-  
+
   create_table "boards" do |t|
     t.integer  :talkable_id, :null => false
     t.string   :talkable_type, :null => false
-    
+
     t.datetime :created_at
     t.datetime :updated_at
     t.datetime :deleted_at
@@ -80,20 +80,20 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
     t.datetime :last_modified_at
     t.integer  :last_modified_by_id
   end
-  
+
   create_table "public_boards" do |t|
     t.string  :title, :null => false, :limit => 100
     t.text    :description
     t.text    :description_html
     t.integer :position, :null => false, :default => 999
   end
-  
+
   create_table "city_boards" do |t|
     t.integer :geo_id, :null => false
     t.text    :description
     t.text    :description_html
   end
-  
+
   create_table "topics" do |t|
     t.integer   :board_id, :null => false
     t.integer   :user_id,  :null => false
@@ -113,12 +113,12 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
 
 	create_table "messages" do |t|
 		t.integer 	:author_id, :null => false
-		t.string 		:subject		
+		t.string 		:subject
 		t.text 			:content
 		t.text 			:html_content
-    t.boolean    :deleted,   :default => false
+    t.boolean   :deleted,   :default => false
 		t.datetime 	:created_at
-		t.datetime 	:updated_at
+    t.integer   :message_copies_count, :default => 0
 	end
 
 	create_table "message_copies" do |t|

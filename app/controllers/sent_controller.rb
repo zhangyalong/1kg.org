@@ -28,7 +28,12 @@ class SentController < ApplicationController
 
   def destroy
     @message = current_messages.find(params[:id])
-    @message.update_attribute('deleted', true)
+    if @message.is_purge?
+      @message.destroy
+    elsif
+      @message.update_attribute('deleted', true)
+    end
+
     flash[:notice] = "你刚刚删除了一条站内消息"
     redirect_to index_path
   end

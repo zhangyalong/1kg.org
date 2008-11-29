@@ -4,19 +4,32 @@
   <h4>> <%= link_to "发布新活动", new_activity_path %></h4>
 <% end -%>
 
-<table border="0" cellspacing="5" cellpadding="5">
-  <tr>
-    <th>类型</th>
-    <th>活动</th>
-    <th>出发地</th>
-    <th>目的地</th>
-  </tr>
-  <% @activities.each do |a| -%>
-  <tr>
-    <td><%= a.category_name %></td>
-    <td><%= link_to a.title, activity_url(a.id) %></td>
-    <td><%= a.departure.name %></td>
-    <td><%= a.arrival.name %></td>
-  </tr>
-  <% end -%>
-</table>
+<div class="tabbedPanel">
+  <ul class="tab">
+    <li class="<%= @category.blank? ? "current" : "" %>"><%= link_to "全部", activities_url %></li>
+    <% Activity.categories.each_with_index do |c, i| -%>
+    <li class="<%= (! @category.blank? && @category[:num]==i) ? "current" : "" %>"><%= link_to c, activities_url(:cat => i) %></li>
+    <% end -%>
+  </ul>
+  <div class="panel setting">
+    <div class="block">
+      <table border="0" cellspacing="5" cellpadding="5">
+        <tr>
+          <th>类型</th>
+          <th>活动</th>
+          <th>出发地</th>
+          <th>目的地</th>
+        </tr>
+        <% @activities.each do |a| -%>
+        <tr>
+          <td><%= a.category_name %></td>
+          <td><%= link_to a.title, activity_url(a.id) %></td>
+          <td><%= a.departure.name %></td>
+          <td><%= a.arrival.name %></td>
+        </tr>
+        <% end -%>
+      </table>
+    </div>
+  </div>
+
+</div>

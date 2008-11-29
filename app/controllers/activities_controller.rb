@@ -2,7 +2,13 @@ class ActivitiesController < ApplicationController
   before_filter :login_required, :except => [:index]
   
   def index
-    @activities = Activity.find(:all, :conditions => {:done => false, :deleted_at => nil})
+    if ! params[:cat].blank? && ! Activity.categories[params[:cat].to_i].blank?
+      # select a specified category
+      @category = {:name => Activity.categories[params[:cat].to_i], :num => params[:cat].to_i}
+      @activities = Activity.find(:all, :conditions => {:done => false, :deleted_at => nil, :category => params[:cat].to_i})
+    else
+      @activities = Activity.find(:all, :conditions => {:done => false, :deleted_at => nil})
+    end    
   end
   
   def new

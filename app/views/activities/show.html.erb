@@ -1,0 +1,23 @@
+<% @page_title = @activity.title -%>
+
+<% content_for :sidebar do -%>
+<% end -%>
+
+<div style="width:200px;margin:5px;border:3px #ccc solid;float:right">
+  <div style="float:right;margin:5px;">
+    <%= avatar_for @activity.user, 'large' %>
+  </div>
+  <h3>重要信息</h3>
+  <p><label>发起人</label><%= link_to @activity.user.login, user_url(@activity.user.id) %></p>
+  <p><label>类型</label><%= @activity.category_name %></p>
+  <p><label>行程</label><%= @activity.departure.name %> -> <%= @activity.arrival.name %></p>
+  <p><label>地点</label><%= @activity.location %></p>
+  <p><label>时间</label><%= @activity.start_at.to_date %> -> <%= @activity.end_at.to_date %></p>
+  <p><label>报名截止</label><%= @activity.register_over_at.to_date %></p>
+  <p><label>人均消费</label><%= @activity.expense_per_head %> 元</p>
+  <p><label>预期人数</label><%= @activity.expect_strength %> 人</p>
+</div>
+
+<div>
+  <%= @activity.description_html %>
+</div>

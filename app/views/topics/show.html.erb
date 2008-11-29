@@ -16,6 +16,11 @@
   </div>
 </div>
 
+<div class="clear" style="margin-top:40px;"></div>
+<% unless @posts.blank? -%>
+  <h3>回复 <%= title_suffix %></h3>
+<% end %>
+
 <div class="commentsList">
   <% @posts.each do |p| -%>
   <div class="block">

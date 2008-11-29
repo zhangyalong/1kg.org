@@ -17,6 +17,10 @@ class Activity < ActiveRecord::Base
     self.class.categories[category]
   end
   
+  def edited_by(user)
+    self.user_id == user.id || user.has_role?('roles.admin')
+  end
+  
   
   private
   def format_content

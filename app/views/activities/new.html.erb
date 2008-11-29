@@ -13,29 +13,12 @@
       <% end -%>
     </select>
   </p>
-  <p><label>名称</label><%= f.text_field :title, :size => 30, :class => "text" %></p>
+  <p><label>出发地</label><%= geo_select "activity", "departure" %></p>
+  <p><label>目的地</label><%= geo_select "activity", "arrival" %></p>
+  <p class="notice">以上三项提交之后不能修改</p>
   
-  <p><label>出发地</label><%= geo_select "activity", "departure" %>
-  </p>
+  <%= render :partial => "form", :object => f %>  
   
-  <p><label>目的地</label><%= geo_select "activity", "arrival" %>
-  </p>
-  
-  
-  <p><label>地点</label><%= f.text_field :location, :size => 30, :class => "text" %></p>
-  <p><label>开始时间</label><%#= calendar_date_select_tag "activity[start_at]" %>
-    <input id="activity_start_at" name="activity[start_at]" type="text" class="text calendar" /> <img alt="Calendar" onclick="new CalendarDateSelect( $(this).previous(), {year_range:10} );" src="/images/calendar_date_select/calendar.gif?1225768469" class="calendar" /></p>
-    
-  <p><label>结束时间</label>
-    <input id="activity_end_at" name="activity[end_at]" type="text" class="text calendar" /> <img alt="Calendar" onclick="new CalendarDateSelect( $(this).previous(), {year_range:10} );" src="/images/calendar_date_select/calendar.gif?1225768469" class="calendar" /></p>
-    
-  <p><label>报名截止</label>
-    <input id="activity_register_over_at" name="activity[register_over_at]" type="text" class="text calendar" /> <img alt="Calendar" onclick="new CalendarDateSelect( $(this).previous(), {year_range:10} );" src="/images/calendar_date_select/calendar.gif?1225768469" class="calendar" /></p>
-    
-  <p><label>人均费用</label><%= f.text_field :expense_per_head, :size => 10, :class => "text" %> 元</p>
-  <p><label>预期人数</label><%= f.text_field :expect_strength, :size => 10, :class => "text" %> 人</p>
-  <p><label>活动介绍</label><%= f.text_area :description, :cols => 50, :rows => 15 %></p>
-    
   <p><label>&nbsp;</label><%= submit_tag "发 布" %></p>
   <% end -%>
   </div>

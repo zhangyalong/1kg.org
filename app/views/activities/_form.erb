@@ -1,0 +1,15 @@
+<p><label>名称</label><%= form.text_field :title, :size => 30, :class => "text" %></p>
+
+<p><label>地点</label><%= form.text_field :location, :size => 30, :class => "text" %></p>
+<p><label>开始时间</label>
+  <input id="activity_start_at" name="activity[start_at]" type="text" value="<%= @activity.start_at.to_date unless @activity.start_at.blank? %>" class="text calendar" /> <img alt="Calendar" onclick="new CalendarDateSelect( $(this).previous(), {year_range:10} );" src="/images/calendar_date_select/calendar.gif?1225768469" class="calendar" /></p>
+  
+<p><label>结束时间</label>
+  <input id="activity_end_at" name="activity[end_at]" type="text" value="<%= @activity.end_at.to_date unless @activity.end_at.blank? %>" class="text calendar" /> <img alt="Calendar" onclick="new CalendarDateSelect( $(this).previous(), {year_range:10} );" src="/images/calendar_date_select/calendar.gif?1225768469" class="calendar" /></p>
+  
+<p><label>报名截止</label>
+  <input id="activity_register_over_at" name="activity[register_over_at]" type="text" value="<%= @activity.register_over_at.to_date unless @activity.register_over_at.blank? %>" class="text calendar" /> <img alt="Calendar" onclick="new CalendarDateSelect( $(this).previous(), {year_range:10} );" src="/images/calendar_date_select/calendar.gif?1225768469" class="calendar" /></p>
+  
+<p><label>人均费用</label><%= form.text_field :expense_per_head, :size => 10, :class => "text" %> 元</p>
+<p><label>预期人数</label><%= form.text_field :expect_strength, :size => 10, :class => "text" %> 人</p>
+<p><label>活动介绍</label><%= form.text_area :description, :cols => 50, :rows => 15 %></p>

@@ -1,0 +1,45 @@
+<% @page_title = "#{@activity.title} 活动讨论区" -%>
+
+<% content_for :sidebar do -%>
+  <h4><%= link_to "返回活动页面", activity_url(@activity.id) %></h4>
+  <h3>活动信息 <%= title_suffix %></h3>
+  <p><label>发起人</label><%= link_to @activity.user.login, user_url(@activity.user.id) %></p>
+  <p><label>类型</label><%= @activity.category_name %></p>
+  <p><label>行程</label><%= @activity.departure.name %> -> <%= @activity.arrival.name %></p>
+  <p><label>地点</label><%= @activity.location %></p>
+  <p><label>时间</label><%= @activity.start_at.to_date %> -> <%= @activity.end_at.to_date %></p>
+  <p><label>报名截止</label><%= @activity.register_over_at.to_date %></p>
+  <p><label>人均消费</label><%= @activity.expense_per_head %> 元</p>
+  <p><label>预期人数</label><%= @activity.expect_strength %> 人</p>
+<% end -%>
+
+<div class="moderators">
+  版主：<%= User.moderators_of(@activity_board.board).collect {|u| link_to(u.login, user_url(u.id))}.join(", ") %>
+</div>
+
+<div class="operations">
+  <%= link_to "写新帖子", new_board_topic_url(@board) %> | 
+</div>
+
+<div class="posting">
+  <div class="block">
+    <table border="0" cellspacing="5" cellpadding="5">
+      <tr>
+        <th>帖子</th>
+        <th>作者</th>
+        <th>回复</th>
+        <th>写于</th>
+      </tr>
+      <% @topics.each do |t| -%>
+      <tr>
+        <td><%= link_to t.title, board_topic_url(@board, t) %></td>
+        <td><%= link_to t.user.login, user_url(t.user) %></td>
+        <td><%= t.posts_count %></td>
+        <td><%= t.created_at.to_date %></td>
+      </tr>
+      <% end -%>
+    </table>
+  </div>
+  
+</div>
+

@@ -18,6 +18,33 @@
   <p><label>预期人数</label><%= @activity.expect_strength %> 人</p>
 </div>
 
+<div class="operations">
+  <% if @activity.edited_by current_user -%>
+    <%= link_to "修改活动信息", edit_activity_url(@activity.id) %>
+  <% end -%>
+</div>
+
 <div>
   <%= @activity.description_html %>
 </div>
+<div class="clear"></div>
+
+<h3>活动讨论区 <%= title_suffix %></h3>
+<p><%= link_to "写新帖子", new_board_topic_url(@board) %></p>
+<table border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <th>标题</th>
+    <th>作者</th>
+    <th>回复</th>
+    <th>写于</th>
+  </tr>
+  <% @topics.each do |topic| -%>
+  <tr>
+    <td><%= link_to topic.title, board_topic_url(@board, topic) %></td>
+    <td><%= link_to topic.user.login, user_url(topic.user.id) %></td>
+    <td><%= topic.posts_count %></td>
+    <td><%= topic.created_at.to_date %></td>
+  </tr>
+  <% end -%>
+</table>
+<p><%= link_to "全部帖子", board_url(@board) %></p>

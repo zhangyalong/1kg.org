@@ -2,6 +2,7 @@ class ActivityBoard < ActiveRecord::Base
   include BodyFormat
   
   has_one :board, :as => :talkable
+  belongs_to :activity
   
   before_save :format_content
   

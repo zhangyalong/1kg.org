@@ -16,9 +16,24 @@ class ActivitiesController < ApplicationController
     flash[:notice] = "发布成功"
     redirect_to activities_url
   end
+  
+  def edit
+    @activity = Activity.find(params[:id])
+  end
+  
+  def update
+    @activity = Activity.find(params[:id])
+    @activity.update_attributes!(params[:activity])
+    flash[:notice] = "修改成功"
+    redirect_to activity_url(@activity.id)
+  end
+  
+  
 
   def show
     @activity = Activity.find(params[:id])
+    @board = ActivityBoard.find(:first, :conditions => {:activity_id => @activity.id}).board
+    @topics = @board.topics.find(:all, :order => "updated_at desc", :limit => 10)
   end
   
 end

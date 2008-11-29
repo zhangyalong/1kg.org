@@ -21,6 +21,11 @@ class BoardsController < ApplicationController
       @public_board = @board.talkable
       render :action => "public"
       
+    elsif @board.talkable.class == ActivityBoard
+      @activity_board = @board.talkable
+      @activity = @activity_board.activity
+      render :action => "activity"
+      
     end
   end
   

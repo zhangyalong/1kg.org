@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   before_filter :login_required, :except => [:index]
   
   def index
-    @activities = Activity.find(:all, :conditions => {:done => false})
+    @activities = Activity.find(:all, :conditions => {:done => false, :deleted_at => nil})
   end
   
   def new
@@ -28,6 +28,12 @@ class ActivitiesController < ApplicationController
     redirect_to activity_url(@activity.id)
   end
   
+  def destroy
+    @activity = Activity.find(params[:id])
+    @activity.update_attributes!(:deleted_at => Time.now)
+    flash[:notice] = "删除成功"
+    redirect_to activities_url
+  end
   
 
   def show

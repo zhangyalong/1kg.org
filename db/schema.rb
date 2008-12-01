@@ -100,6 +100,12 @@ ActiveRecord::Schema.define(:version => 20081009072037) do
     t.text    :description_html
   end
   
+  create_table "school_boards" do |t|
+    t.integer :school_id, :null => false
+    t.text    :description
+    t.text    :description_html
+  end
+  
   create_table "topics" do |t|
     t.integer   :board_id, :null => false
     t.integer   :user_id,  :null => false

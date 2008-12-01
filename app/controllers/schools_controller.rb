@@ -77,6 +77,13 @@ class SchoolsController < ApplicationController
   
   def show
     @school = School.find(params[:id])
+    @board = SchoolBoard.find(:first, :conditions => {:school_id => @school.id}).board
+    @topics = @board.topics.find(:all, :order => "updated_at desc", :limit => 10)
+  end
+  
+  
+  def info
+    @school = School.find(params[:id])
     
     if params[:type] == "traffic"
       @type = "traffic"

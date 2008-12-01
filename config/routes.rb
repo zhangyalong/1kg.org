@@ -29,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/geo_choice', :controller => 'geos_controller', :action => 'geo_choice'
   
   
-  map.resources :schools do |school|
+  map.resources :schools, :member => {:info => :get} do |school|
     school.resources :visits
     school.resources :photos
     school.resource  :space

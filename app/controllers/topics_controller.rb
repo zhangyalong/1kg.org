@@ -18,6 +18,10 @@ class TopicsController < ApplicationController
     flash[:notice] = "发帖成功"
     if @board.talkable.class == ActivityBoard
       redirect_to activity_url(@board.talkable.activity_id)
+      
+    elsif @board.talkable.class == SchoolBoard
+      redirect_to school_url(@board.talkable.school_id)
+      
     else
       redirect_to board_url(@board)
     end
